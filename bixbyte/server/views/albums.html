@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>G-tel | My Albums </title>
+    <script src="jquery.js"></script>
+</head>
+
+<body>
+    <script>
+        $(function () {
+            $.post("/gtel/user/albums", {
+                    g_user: "ianmin2"
+                },
+                function () {});
+        });
+    </script>
+</body>
+
+</html>
