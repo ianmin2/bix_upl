@@ -1,11 +1,11 @@
 //!BASIC IMPORTS BEFORE APP INITIALIZATION
-var os = require("os");
-var fs = require("fs");
-var zip = require("adm-zip");
-var http = require("http");
-var targz = require("tar.gz");
+var os      = require("os");
+var fs      = require("fs");
+var zip     = require("adm-zip");
+var http    = require("http");
+var targz   = require("tar.gz");
 var mandrill = require("mandrill-api/mandrill");
-var c = require("colors");
+var c       = require("colors");
 
 //!INITIALIZE THE COLORS MODULE ( for custom logging )
 c.setTheme({
@@ -15,10 +15,10 @@ c.setTheme({
 });
 
 //!LOAD THE CUSTOM MODULES
-var ipvify = require("./ipvify.js");
-var app = require("./bixbyte/server");
-var main = require("./bixbyte/main");
-var log = require("./logger.js")("./bixbyte/logs/app.log", true);
+var ipvify  = require("./ipvify.js");
+var app     = require("./bixbyte/server");
+var main    = require("./bixbyte/main");
+var log     = require("./logger.js")("./bixbyte/logs/app.log", true);
 
 //!INITIALIZE THE EMAIL SENDER WITH THE API KEY
 var mandrill_client = new mandrill.Mandrill("bTzP6ZlUlI55jRcyXAolzw");
@@ -107,6 +107,7 @@ var visits = fs.createWriteStream("visitors.byt", {
 });
 log("Visitor logger established".success);
 
+//!PACKAGE A USER'S ALBUM
 var packageAlbum = function(g_user, g_album) {
 
     log("Initializing the packaging of ".info + g_album + " for ".info + g_user);
@@ -145,23 +146,23 @@ var packageAlbum = function(g_user, g_album) {
                             //!Delete the album folder
                             rmdir(album_path)
                                 .catch(function(err) {
-                                    log(err.message);
-                                })
+                                log(err.message);
+                            })
                                 .then(function(resp) {
 
-                                    log(resp.message);
-                                    sendMail(g_user, g_album);
+                                log(resp.message);
+                                sendMail(g_user, g_album);
 
-                                })
+                            })
                                 .catch(function(err) {
-                                    log(err.message);
-                                })
+                                log(err.message);
+                            })
                                 .then(function() {
-                                    resolve({
-                                        status: 200,
-                                        message: "Successfully packaged the album ".success + g_album
-                                    });
+                                resolve({
+                                    status: 200,
+                                    message: "Successfully packaged the album ".success + g_album
                                 });
+                            });
 
 
                         } else {
@@ -199,6 +200,7 @@ var packageAlbum = function(g_user, g_album) {
 
     //!EO - Package Album    
 };
+
 
 //!CREATE A DIRECTORY
 var mkDir = function(dirName) {
@@ -457,15 +459,15 @@ var procIt = function(req, res) {
                         //!Upload the image
                         imgUpload(tmp_path, target_path, gtel_upload.originalname, "")
                         //!Log the result of the upload
-                        .then(function(resp) {
+                            .then(function(resp) {
                             log(resp.message);
                         })
                         //!Catch any overlooked errors
-                        .catch(function(err) {
+                            .catch(function(err) {
                             log("CRITICAL OVERLOOKED ERROR: \n".err + err.message);
                         })
                         //!Return the response to the client
-                        .then(function() {
+                            .then(function() {
 
                             //!Inform the client of a successfull upload of the file
                             res.send(main.makeResponse("SUCCESS", "Your File Has been Uploaded!", "complete"));
@@ -535,15 +537,15 @@ app.route("/gtel/api/done/:user/:album").all(function(req, res) {
         //!Zip and mail the file to the relevant parties
         packageAlbum(g_user, g_album)
         //!Display the result of the packaging
-        .then(function(resp) {
+            .then(function(resp) {
             log(resp.message);
         })
         //!Return a "SUccess" response to the client
-        .then(function() {
+            .then(function() {
             res.send(main.makeResponse("SUCCESS", "Album successfully submitted for  printing", ""));
         })
         //!Capture any errors
-        .catch(function(err) {
+            .catch(function(err) {
             res.send(main.makeResponse("ERROR", err.message, ""));
         });
 
