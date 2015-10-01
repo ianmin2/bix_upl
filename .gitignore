@@ -19,3 +19,6 @@
 
 #! Ignore the sql backup directory 
 **sql
+
+#! Ignore the administrative portal
+**admin 	

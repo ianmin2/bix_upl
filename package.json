@@ -2,7 +2,7 @@
   "name": "gtel",
   "version": "1.0.0",
   "description": "A simple GTel application to allow for user photo printing",
-  "main": "app.js",
+  "main": "promisify.js",
   "dependencies": {
     "adm-zip": "^0.4.7",
     "body-parser": "^1.12.3",

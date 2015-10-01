@@ -47,6 +47,9 @@
         "/nodejs/gtel/mobile/picSnapp/plugins/org.apache.cordova.file/www/blackberry10/remove.js",
         "/nodejs/gtel/mobile/picSnapp/www/lib/ionic/js/ionic-angular.js",
         "/nodejs/gtel/mobile/picSnapp/plugins/org.apache.cordova.file/www/ubuntu/fileSystems-roots.js",
-        "/nodejs/gtel/mobile/picSnapp/plugins/org.apache.cordova.file/www/ubuntu/FileSystem.js"
+        "/nodejs/gtel/mobile/picSnapp/plugins/org.apache.cordova.file/www/ubuntu/FileSystem.js",
+        "/nodejs/gtel/mobile/picSnapp/www/lib/ionic/js/angular/angular-animate.min.js",
+        "/nodejs/gtel/mobile/picSnapp/www/lib/ionic/js/angular/angular-sanitize.min.js",
+        "/nodejs/gtel/mobile/picSnapp/www/views/lib/ionic/js/ionic.bundle.min.js"
     ]
 }
